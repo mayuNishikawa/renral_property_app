@@ -15,7 +15,7 @@ class PropertiesController < ApplicationController
   end
 
   def edit
-    # @property.closest_stations.build
+    @property.closest_stations.build
   end
 
   def create

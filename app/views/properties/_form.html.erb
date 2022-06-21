@@ -18,12 +18,12 @@
 
   <div class="field">
     <%= form.label :rent %>
-    <%= form.number_field :rent %>円
+    <%= form.text_field :rent %>円
   </div>
 
   <div class="field">
     <%= form.label :address %>
-    <%= form.text_area :address %>
+    <%= form.text_field :address %>
   </div>
 
   <div class="field">
@@ -52,7 +52,7 @@
 
       <div class="field">
         <%= closest_station.label :walking_time %>
-        <%= closest_station.text_area :walking_time %>分
+        <%= closest_station.text_field:walking_time %>分
       </div>
 
       <% n+=1 %>
