@@ -6,35 +6,38 @@ class PropertiesController < ApplicationController
   end
 
   def show
+    @closest_stations = @property.closest_stations
   end
 
   def new
     @property = Property.new
+    2.times { @property.closest_stations.build }
   end
 
   def edit
+    # @property.closest_stations.build
   end
 
   def create
     @property = Property.new(property_params)
     if @property.save
-      redirect_to @property, notice: "Property was successfully created."
+      redirect_to @property, notice: "物件を登録しました"
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
   def update
     if @property.update(property_params)
-      redirect_to @property, notice: "Property was successfully updated."
+      redirect_to @property, notice: "物件を編集しました"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
   def destroy
     @property.destroy
-    redirect_to properties_url, notice: "Property was successfully destroyed."
+    redirect_to properties_url, notice: "物件を削除しました"
   end
 
   private
@@ -43,6 +46,11 @@ class PropertiesController < ApplicationController
     end
 
     def property_params
-      params.require(:property).permit(:property_name, :rent, :address, :property_age, :notes)
+      params.require(:property).permit(
+        :property_name, :rent, :address, :property_age, :notes,
+        closest_stations_attributes: %i[
+          track_name station_name walking_time
+        ],
+      )
     end
 end
